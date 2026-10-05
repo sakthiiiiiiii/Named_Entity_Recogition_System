@@ -2,18 +2,20 @@
 
 > Precision medical entity detection for clinical text using transformer-based NLP.
 
-## Overview
-This repository contains a Google Colab-ready workflow for fine-tuning a Named Entity Recognition (NER) model for medical and clinical text. The project uses spaCy's transformer pipeline with a biomedical language model, enabling high-quality extraction of entities such as diseases, medications, treatments, symptoms, and other clinically relevant terms.
+Repository: https://github.com/sakthiiiiiiii/Named_Entity_Recogition_System
 
-The notebook in this repository demonstrates how to set up the environment, verify GPU availability, mount Google Drive, prepare training data, generate a spaCy configuration, and train a transformer-based NER model for medical text.
+## Overview
+This repository contains a Google Colab-ready workflow for fine-tuning a Named Entity Recognition (NER) model for medical and clinical text. The project uses spaCy’s transformer pipeline with a biomedical language model to detect entities such as diseases, medications, symptoms, procedures, and other clinically relevant terms.
+
+The notebook in this repository demonstrates how to set up the environment, verify GPU support, mount Google Drive, prepare training data, generate a spaCy configuration, and train a transformer-based NER model for healthcare text.
 
 ## Key Features
-- Fine-tunes a medical NER model using spaCy and transformer architectures
-- Uses BioClinicalBERT for biomedical domain adaptation
-- Built for Google Colab with GPU acceleration support
-- Supports training and validation splits for spaCy data files
-- Integrates easily with Google Drive for dataset and model persistence
-- Ready for downstream clinical NLP tasks and entity extraction workflows
+- Fine-tunes a medical NER model using spaCy and transformers
+- Uses BioClinicalBERT for biomedical text understanding
+- Optimized for Google Colab and GPU-enabled training
+- Supports training, validation, and evaluation workflows
+- Stores datasets and model outputs in Google Drive
+- Suitable for clinical text analysis and healthcare NLP tasks
 
 ## Tech Stack
 - Python
@@ -22,29 +24,29 @@ The notebook in this repository demonstrates how to set up the environment, veri
 - Hugging Face Transformers
 - PyTorch
 - Google Colab
-- GPU-enabled training (CUDA)
+- CUDA / GPU Training
 - BioClinicalBERT
 
 ## Repository Structure
-- `Medical_NER_Fine_Tuning_Colab.ipynb` — main training notebook for the medical NER workflow
+- `Medical_NER_Fine_Tuning_Colab.ipynb` — main notebook for model setup and training
 
 ## Installation
-### Option 1: Google Colab (Recommended)
+### Option 1: Google Colab
 1. Open the notebook in Google Colab.
-2. Run the notebook cells in order from top to bottom.
-3. Install the required dependencies:
+2. Run the cells sequentially from top to bottom.
+3. Install dependencies:
 
 ```bash
 !pip install -U spacy==3.8.14 spacy-transformers==1.3.9 transformers accelerate
 ```
 
-4. Validate the spaCy installation:
+4. Validate the installation:
 
 ```bash
 !python -m spacy validate
 ```
 
-5. Mount your Google Drive if storing datasets or model outputs there:
+5. Mount Google Drive if you are storing data or model files there:
 
 ```python
 from google.colab import drive
@@ -52,17 +54,14 @@ drive.mount('/content/drive')
 ```
 
 ## Usage
-### 1. Configure paths
-Set your training, development, and test data paths:
-
+### 1. Set dataset paths
 ```python
 TRAIN_PATH = '/content/train.spacy'
 DEV_PATH = '/content/dev.spacy'
 TEST_PATH = '/content/test.spacy'
 ```
 
-### 2. Generate a spaCy transformer config
-
+### 2. Initialize spaCy transformer config
 ```bash
 !python -m spacy init config config.cfg \
   --lang en \
@@ -72,7 +71,6 @@ TEST_PATH = '/content/test.spacy'
 ```
 
 ### 3. Train the model
-
 ```bash
 !python -m spacy train config.cfg \
   --output /content/drive/MyDrive/output.model \
@@ -81,7 +79,7 @@ TEST_PATH = '/content/test.spacy'
   --gpu-id 0
 ```
 
-### 4. Load the transformer model
+### 4. Load the model
 ```python
 import spacy
 
@@ -100,9 +98,7 @@ nlp.add_pipe(
 print("Transformer loaded successfully!")
 ```
 
-### 5. Run inference
-After training, load the model and pass clinical text through it to extract named entities:
-
+### 5. Run entity extraction
 ```python
 import spacy
 
@@ -115,19 +111,16 @@ for ent in doc.ents:
 ```
 
 ## Example Use Cases
-- Clinical note entity extraction
-- Medical record analysis
-- Disease and treatment recognition
-- Biomedical NLP research and prototyping
-- Healthcare text intelligence workflows
+- Clinical note analysis
+- Disease and symptom recognition
+- Medication extraction
+- Biomedical NLP research
+- Healthcare text understanding
 
 ## Notes
-- GPU support is strongly recommended for faster training and improved experimentation speed.
-- This project is designed for medical domain NER tasks and works best with domain-specific annotated datasets.
-- The notebook is intended as a training and prototyping workflow, making it easy to adapt for custom datasets.
-
-## License
-This project is provided as-is for educational and research purposes. Please review the repository license if one is added later.
+- GPU support is recommended for faster and more efficient training.
+- This project is tailored for medical-domain NER and works best with annotated clinical datasets.
+- The workflow is easy to adapt for custom datasets and research experiments.
 
 ## Acknowledgments
-This workflow relies on spaCy, Hugging Face Transformers, and the BioClinicalBERT biomedical language model for clinical text understanding.
+This project builds on the capabilities of spaCy, Hugging Face Transformers, PyTorch, and the BioClinicalBERT model for biomedical entity recognition.
